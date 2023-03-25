@@ -43,7 +43,7 @@ function Register() {
     // console.log(data);
     if (terms) {
       axios
-        .post("http://localhost:8000/api/users/signup", {
+        .post("https://notes-backend-five.vercel.app/api/users/signup", {
           email: email,
           password: password,
         })
