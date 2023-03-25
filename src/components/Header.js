@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { FaFileExport } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import jsPDF from "jspdf";
+
 function Header() {
+  const [data, setData] = useState([]);
+
+  const generatePDF = () => {
+    let val = data;
+    let pdfcontent = "";
+    for (let i = 0; i < data.length; i++) {
+      pdfcontent += JSON.stringify(val[i]);
+    }
+    const doc = new jsPDF();
+    console.log(pdfcontent);
+    const splitText = doc.splitTextToSize(pdfcontent, 180);
+    doc.text(splitText, 15, 15);
+    doc.save("document.pdf");
+  };
+
   const email = localStorage.getItem("email");
+
   function deleteAll() {
     axios
       .delete(`http://localhost:8000/api/notes/deleteall/${email}`)
@@ -18,6 +36,12 @@ function Header() {
       .catch((error) => console.log(error));
   }
   const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`https://notes-backend-five.vercel.app/api/notes/${email}`)
+      .then((res) => setData(res.data.notes))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div>
       <nav
@@ -61,7 +85,7 @@ function Header() {
                 Delete All
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" onClick={generatePDF}>
               <button type="button" className="btn btn-info">
                 <FaFileExport /> Export
               </button>
