@@ -27,7 +27,7 @@ function Header() {
 
   function deleteAll() {
     axios
-      .delete(`http://localhost:8000/api/notes/deleteall/${email}`)
+      .delete(`https://notes-backend-five.vercel.app/api/notes/deleteall/${email}`)
       .then((res) => {
         alert("Deleted All");
         alert("Refresh and see");
