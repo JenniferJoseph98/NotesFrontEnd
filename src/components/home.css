@@ -1,0 +1,22 @@
+.logo{
+    width: 45px;
+    height: 45px;
+}
+.nav-item{
+    margin-left: 10px;
+}
+.datadiv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.detailsdivtag{
+    margin-top: 25px;
+    width: 80%;
+    padding: 25px;
+    text-align: start;
+    height: 40%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
